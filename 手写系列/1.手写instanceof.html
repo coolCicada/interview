@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 变量R的原型 存在于 变量L的原型链上
+    function instanceOf(L, R) {
+      const baseType = ['string', 'number', 'boolean', 'undefined', 'symbol']
+      if (baseType.includes(typeof(L))) return false
+      let RP = R.prototype  //取 R 的显式原型
+      L = L.__proto__       //取 L 的隐式原型
+      while (true) {
+        if (L === null) return false //找到最顶层
+        if (L === RP) return true   //严格相等
+        L = L.__proto__ //没找到继续向上一层原型链查找
+      }
+    }
+  </script>
+</body>
+</html>

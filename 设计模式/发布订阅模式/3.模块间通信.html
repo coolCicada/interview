@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./2.发布和订阅者解耦.js"></script>
+</head>
+<body>
+  <button id="count">点我</button>
+  <div id="show"></div>
+  <script>
+    void function () {
+      let count = 0
+      const button = document.getElementById('count')
+      button.onclick = function () {
+        event.trigger('add', count++)
+      }
+    } ()
+
+    void function () {
+      const div = document.getElementById('show')
+      event.listen('add', function (count) {
+        div.innerHTML = count
+      })
+    } ()
+  </script>
+</body>
+</html>

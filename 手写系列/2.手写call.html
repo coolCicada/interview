@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    Function.prototype.call2 = function (context) {
+      const realContext = context || window
+      realContext.fn = this
+      const args = []
+      for (let i = 1, len = arguments.length; i < len; i++) {
+        args.push('arguments[' +i + ']')
+        // 错误 --， 等不能作为参数 而且字符串也变成了数字 因为调用的是args的toString方法
+        // args.push(arguments[i])
+      }
+      const exec = 'realContext.fn(' + args +')'
+      console.log('exec: ', exec)
+      const result = eval(exec)
+      delete realContext.fn
+      return result
+    }
+
+    function time (time, tt) {
+      console.log(this.one + '--->' + this.two + '::' + time);
+      console.log(time, tt)
+    }
+
+    time.call({one: '1', two: '2'}, '2')
+    time.call({one: '3', two: '4'}, '--')
+    time.call2({one: '5', two: '6'}, '2', 3)
+    time.call2({one: '7', two: '8'}, '--')
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="loginBtn">Btn</button>
+  <script>
+    const createLoginLayer = () => {
+      const div = document.createElement('div')
+      div.innerHTML = '我是登陆弹窗'
+      div.style.display = 'none'
+      document.body.appendChild(div)
+      return div
+    }
+    const createSingle = (function () {
+      const instance = {}
+      return function (fn) {
+        if (!instance[fn.name]) {
+          instance[fn.name] = fn.apply(null, arguments)
+        }
+        return instance[fn.name]
+      }
+    })()
+    const createIframe = function (arg) {
+      const iframe = document.createElement('iframe')
+      document.body.appendChild(iframe)
+      iframe.style.display = 'none'
+      return iframe
+    }
+
+    const createSingleLoginLayer = createSingle(createLoginLayer)
+    const createSingleIframe = createSingle(createIframe)
+
+    document.getElementById('loginBtn')
+    .onclick = () => {
+      const loginLayer = createSingleLoginLayer
+      const iframe = createSingleIframe
+      loginLayer.style.display = 'block'
+      iframe.style.display = 'block'
+    }
+  </script>
+</body>
+</html>

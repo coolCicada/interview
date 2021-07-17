@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'comp.js',
+    filename: 'comp.js'
   },
   mode: 'development',
   devServer: {
@@ -9,7 +9,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { 
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
         // exclude: /node_modules/

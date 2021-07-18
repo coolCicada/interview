@@ -8,6 +8,25 @@
 </head>
 <body>
   <script>
+    Function.prototype.myCall = function (context) {
+      const context = context || window
+      context.fn = this
+
+      const args = []
+      for (let i = 1; i < arguments.length; i++) {
+        args.push('arguments[' + i + ']')
+      }
+      
+      const result = eval('context.fn(' + args + ')')
+
+      delete context.fn
+      return result
+    }
+
+  </script>
+
+
+  <script>
     Function.prototype.call2 = function (context) {
       const realContext = context || window
       realContext.fn = this
@@ -33,6 +52,7 @@
     time.call({one: '3', two: '4'}, '--')
     time.call2({one: '5', two: '6'}, '2', 3)
     time.call2({one: '7', two: '8'}, '--')
+
   </script>
 </body>
 </html>

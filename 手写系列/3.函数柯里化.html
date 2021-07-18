@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function curry (fn) {
+      const judge = (...args) => {
+        if (args.length === fn.length) return fn(...args)
+        return (...arg) => judge(...args, ...arg)
+      }
+      return judge
+    }
+    function add (a, b, c) {
+      return a + b + c
+    }
+    add(1, 2, 3)
+    const addCurry = curry(add)
+    const r = addCurry(1)(2)(3)
+    console.log(r)
+    const r2 = addCurry(1, 2)(3)
+    console.log(r2)
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function objectFactory () {
+      const obj = new Object()
+      const Constructor = [].shift.call(arguments)
+      obj.__proto__ = Constructor.prototype
+      const ret = Constructor.apply(obj, arguments)
+
+      return typeof ret === 'object' ? ret || obj : obj
+    }
+    function person(name, age) {
+    this.name = name
+    this.age = age
+    }
+    let p = objectFactory(person, '布兰', 12)
+    console.log(p)
+
+  </script>
+</body>
+</html>
